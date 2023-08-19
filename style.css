@@ -1,0 +1,91 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+@font-face {
+    font-family: futura-book;
+    src: url(fonts/Futura\ Book\ font.ttf);
+  }
+  
+  @font-face {
+    font-family: futura-light;
+    src: url(fonts/futura\ light\ bt.ttf);
+  }
+  @font-face {
+    font-family: caprasimo-regular;
+    src: url(fonts/Caprasimo-Regular.ttf);
+  }
+
+body {
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+    font-family: "futura-light";
+}
+
+.header {
+    width: 100%;
+    background-color: #7e1215;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+h1 {
+    padding: 25px;
+    font-family: "caprasimo-regular";
+    letter-spacing: 2px;
+    font-size: 35px;
+    font-weight: bold;
+    color: white;
+}
+
+.container {
+    display: flex;
+    height: 100vh;
+}
+
+img {
+    width: 100%;
+    height: 100%;
+}
+
+.image-container {
+    flex: 1;
+    padding: 35px;
+}
+
+.button-container {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 50px;
+    gap: 25px;
+    font-size: 25px;
+}
+
+button {
+    font-family: "futura-light";
+    font-size: 20px;
+    padding: 10px 20px;
+}
+
+button:hover{
+    cursor: pointer;
+}
+
+.footer {
+    width: 100%;
+    height: 100px;
+    background-color: #7e1215;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.footer-text {
+    color: white;
+}
