@@ -43,9 +43,20 @@ const APIController = (function() {
 const UIController = (function() {})();
 
 const APPController = (function(UICtrl, APICtrl) {
-    const token = APICtrl.getToken();
-    console.log(token);
+
+    const loadGenres = async () => {
+        //get the token
+        const token = await APICtrl.getToken();           
+        console.log(token);
+    }
+
+    return {
+        init() {
+            console.log('App is starting');
+            loadGenres();
+        }
+    }
 })(UIController, APIController);
 
-
+APPController.init();
 
