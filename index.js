@@ -1,4 +1,5 @@
-const REDIRECT_URI = "http://127.0.0.1:5500/redirect.html";
+// const REDIRECT_URI = "http://127.0.0.1:5500/redirect.html";
+const REDIRECT_URI = "https://awardify.vercel.app/redirect.html";
 const SCOPE = 'user-top-read';
 const AUTHORIZE = "https://accounts.spotify.com/authorize";
 const TOKEN = "https://accounts.spotify.com/api/token";
@@ -124,7 +125,7 @@ function handleArtistsResponses() {
 function handleRedirect() {
     let code = getCode();
     getAccessToken(code);
-    window.history.pushState("", "", REDIRECT_URI);
+    //window.history.pushState("", "", REDIRECT_URI);
 }
 
 function getAccessToken(code) {
