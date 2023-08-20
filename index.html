@@ -7,35 +7,34 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body onload="onPageLoad()">
-    <div class="header">
-        <h1>AWARDIFY</h1>
-    </div>
-    <div class="container">
-        <div class="image-container">
-            <img src="spotify.png" alt="">
+    <div class="body-container" id="blur">
+        <div class="header">
+            <h1><a href="">AWARDIFY</a></h1>
+            <ul class="header-options">
+                <li class="header-option"><a href="">Home</a></li>
+                <li class="header-option"><a onclick="toggleModal()">Privacy Policy</a></li>
+                <li class="header-option"><a href="">Contact Us</a></li>
+            </ul>
         </div>
         <div class="options-container">
             <div class="create-text">
-                <h2>Create an award show with your top artists</h2>
+                <h2>Build an award show with your top artists or songs.</h2>
             </div>
             <div class="download-button">
                 <button class="sign-in-btn" type="button" onclick="requestAuthorization()">Log in with Spotify</button>
             </div>
         </div>
-        <!-- <div class="options-container">
-            <div class="time-period">
-                <p><a href="">Last 4 Weeks</a> <a href="">Last 6 Months</a> <a href="">All-time</a></p>
-            </div>
-            <div class="presenter-selection">
-                <button>Edit Presenter</button>
-            </div>
-            <div class="download-button">
-                <button>Download and Share</button>
-            </div>
+        <!-- <div class="image-container">
+            <img src="spotify.png" alt="">
         </div> -->
+        <div class="footer">
+            <p class="footer-text">Made by da boys</p>
+        </div>
     </div>
-    <div class="footer">
-        <p class="footer-text">Made by da boys</p>
+    <div id="modal">
+        <h2>Privacy Policy</h2>
+        <p>Don't do sus tings</p>
+        <button onclick="toggleModal()">Close</button>
     </div>
 </body>
 <script src="index.js"></script>

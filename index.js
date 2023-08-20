@@ -1,5 +1,5 @@
-// const REDIRECT_URI = "http://127.0.0.1:5500/redirect.html";
-const REDIRECT_URI = "https://awardify.vercel.app/redirect.html";
+const REDIRECT_URI = "http://127.0.0.1:5500/home.html";
+//const REDIRECT_URI = "https://awardify.vercel.app/home.html";
 const SCOPE = 'user-top-read';
 const AUTHORIZE = "https://accounts.spotify.com/authorize";
 const TOKEN = "https://accounts.spotify.com/api/token";
@@ -89,12 +89,13 @@ function requestAuthorization() {
 function onPageLoad() {
     if(window.location.search.length > 0 ){
         handleRedirect();
-        loadArtists();
     }
 }
 
 function loadArtists() {
-    callApi("GET", "https://api.spotify.com/v1/me/top/artists?limit=5&offset=0", null, handleArtistsResponses)
+    console.log('byeybe');
+    callApi("GET", "https://api.spotify.com/v1/me/top/artists?limit=5&offset=0", null, handleArtistsResponses);
+    console.log('hihi');
 }
 
 function callApi(method, url, body, callback){
@@ -167,6 +168,11 @@ function getAccessToken(code) {
     // callAuthorizationApi(str);
 }
 
+document.addEventListener("DOMContentLoaded", function(event) { 
+    console.log('hello')
+    document.getElementById("my-btn").click();
+});
+
 
 function getCode() {
     let code = null; 
@@ -175,6 +181,13 @@ function getCode() {
         code = urlParams.get('code');
     }
     return code;
+}
+
+function toggleModal(){
+    var blur = document.getElementById('blur');
+    blur.classList.toggle('active');
+    var modal = document.getElementById('modal');
+    modal.classList.toggle('active');
 }
 
 
