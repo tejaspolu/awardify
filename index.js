@@ -1,5 +1,5 @@
-const REDIRECT_URI = "http://127.0.0.1:5500/home.html";
-//const REDIRECT_URI = "https://awardify.vercel.app/home.html";
+//const REDIRECT_URI = "http://127.0.0.1:5500/home.html";
+const REDIRECT_URI = "https://awardify.vercel.app/home.html";
 const SCOPE = 'user-top-read';
 const AUTHORIZE = "https://accounts.spotify.com/authorize";
 const TOKEN = "https://accounts.spotify.com/api/token";
