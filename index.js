@@ -90,7 +90,7 @@ function requestAuthorization() {
 }
 
 function onPageLoad() {
-    if(window.location.href.includes('index.html')){
+    if(!window.location.href.includes('home.html')){
         handleRedirect();
         console.log('hello');
         loadArtists();
