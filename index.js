@@ -90,9 +90,8 @@ function requestAuthorization() {
 }
 
 function onPageLoad() {
-    if(window.location.search > 0){
+    if(window.location.search.length > 0){
         handleRedirect();
-        console.log('hello');
         loadArtists();
     }
 }
@@ -290,12 +289,10 @@ function handleArtistDOM(data) {
 
 function handleRedirect() {
     let code = getCode();
-    console.log('hi');
     getAccessToken(code);
 }
 
 function getAccessToken(code) {
-    console.log('bye');
     let codeVerifier = localStorage.getItem('code_verifier');
     let body = new URLSearchParams({
         grant_type: 'authorization_code',
@@ -319,15 +316,12 @@ function getAccessToken(code) {
         return response.json();
     })
     .then(data => {
-        console.log(data.access_token);
         localStorage.setItem('access_token', data.access_token);
         localStorage.setItem("refresh_token", refresh_token);
     })
     .catch(error => {
         console.error('Error:', error);
     });
-
-    console.log(response);
     
     // let str = "grant_type=authorization_code";
     // str += "&code=" + code; 
