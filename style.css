@@ -119,19 +119,64 @@ h2 {
     height: 100vh;
 }
 
-img {
-    width: 100%;
-    height: 100%;
-    display: hidden;
-}
-
 .create-text {
     text-align: center;
 }
 
 .image-container {
     flex: 1;
-    padding: 35px;
+    position: relative;
+    margin: 35px;
+    display: flex;
+    flex-shrink: 0;
+    min-width: 600px;
+}
+
+.image-container img {
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+}
+
+.data-container {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    top: 0;
+    right: 0;
+    height: 50%;
+    width: 60%;
+    object-fit: contain;
+    gap: 10px;
+    border: 5px solid black;
+    background: radial-gradient(circle at 10% 20%, rgb(221, 49, 49) 0%, rgb(119, 0, 0) 90%);
+    margin: 10px 10px 0 0 ;
+    justify-content: center;
+    padding: 25px 10px 0 25px;
+}
+
+.data-container div {
+    flex: 1;
+    display: flex;
+    gap: 10px;
+}
+
+.data-container div img{
+    border-radius: 15px;
+    border: 1px solid black;
+}
+
+div.award-container {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    overflow-wrap: break-word;
+
+}
+
+div.award-container p {
+
 }
 
 .options-container {
@@ -163,12 +208,17 @@ button:hover{
 }
 
 .btn-option {
+    flex: 1;
     font-family: "poppins-medium";
     border:none;
     border-radius: 5px;
 }
 
-.btn-option:focus {
+.no-underline {
+    text-decoration: none;
+}
+
+.underline {
     text-decoration: underline;
 }
 
@@ -222,3 +272,13 @@ a:visited {
     opacity: 1;
     transition: 0.5s;
 }
+
+#modal p {
+    padding-top: 10px;
+    font-family: "poppins-regular";
+}
+
+#modal button {
+    margin-top: 20px;
+}
+

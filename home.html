@@ -14,7 +14,7 @@
                 <li class="header-option"><a href="">Home</a></li>
                 <li class="header-option"><a onclick="toggleModal()">Privacy Policy</a></li>
                 <li class="header-option"><a href="">Contact Us</a></li>
-                <li class="header-option"><a href="">Logout</a></li>
+                <li class="header-option"><a onclick="logOut()">Logout</a></li>
             </ul>
         </div>
         <div class="container">
@@ -23,13 +23,13 @@
                     <div class="data-selection">
                         <p class="options-description">Name of award:</p>
                         <div class="btn-option-container">
-                            <button class="btn-option" id="my-btn" onclick="loadArtists()">Top Artist</button><button class="btn-option">Top Song</button><button class="btn-option">Top Album</button>
+                            <button class="award-option underline" id="artist-btn" onclick="loadArtists()">Top Artist</button><button class="award-option no-underline" id="song-btn" onclick="loadSongs()">Top Song</button>
                         </div>
                     </div>
                     <div class="time-period">
                         <p class="options-description">Select a time period:</p>
                         <div class="btn-option-container">
-                            <button class="btn-option">Last 4 Weeks</button><button class="btn-option">Last 6 Months</button><button class="btn-option">All-Time</button>
+                            <button class="time-option no-underline btn-weeks" onclick="loadData('short_term')">Last 4 Weeks</button><button class="time-option underline btn-months" onclick="loadData('medium_term')">Last 6 Months</button><button class="time-option no-underline btn-years" onclick="loadData('long_term')">All-Time</button>
                         </div>
                     </div>
                 </div>
@@ -41,7 +41,10 @@
                 </div>
             </div>
             <div class="image-container">
-                <img src="spotify.png" alt="">
+                <img src="stage.png" alt="" class="stage-img">
+                <div class="data-container">
+
+                </div>
             </div>
         </div>
         <div class="footer">
@@ -50,7 +53,9 @@
     </div>
     <div id="modal">
         <h2>Privacy Policy</h2>
-        <p>Don't do sus tings</p>
+        <p>Awardify uses the Spotify Web API to receive data from your Spotify profile. By choosing to use Awardify, you agree to the use of your Spotify account username and data for your top artists and tracks.</p>
+        <p>None of the data used by Awardify is stored or collected anywhere, and it is not shared with any third parties. All information is used only for displaying your award show.</p>
+        <p>If you would like to remove Awardify's permissions to access your Spotify data, please do so <a href="https://support.spotify.com/us/article/spotify-on-other-apps/" target="_blank">here</a>.</p>
         <button onclick="toggleModal()">Close</button>
     </div>
 </body>
