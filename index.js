@@ -1,6 +1,6 @@
-//const REDIRECT_URI = "http://127.0.0.1:5500/home.html";
+const REDIRECT_URI = "http://127.0.0.1:5500/home.html";
 //const INDEX_URI = "http://127.0.0.1:5500/index.html";
-const REDIRECT_URI = "https://awardify.vercel.app/home.html";
+//const REDIRECT_URI = "https://awardify.vercel.app/home.html";
 const INDEX_URI = "https://awardify.vercel.app/index.html";
 const SCOPE = 'user-top-read';
 const AUTHORIZE = "https://accounts.spotify.com/authorize";
@@ -173,6 +173,8 @@ function handleSongsResponses() {
 
 function handleSongDOM(data) {
     const imageContainer = document.querySelector('.data-container');
+    const imageContainerPaddingLeft = parseFloat(window.getComputedStyle(imageContainer, null).getPropertyValue('padding-left'));
+    const imageContainerPaddingRight = parseFloat(window.getComputedStyle(imageContainer, null).getPropertyValue('padding-right'));
     if(imageContainer.children.length > 0) {
         while (imageContainer.firstChild) {
             imageContainer.removeChild(imageContainer.lastChild);
@@ -193,7 +195,7 @@ function handleSongDOM(data) {
     
     const awardContainer = document.createElement('div');
     awardContainer.classList.add('award-container');
-    const awardTitle = document.createTextNode("Top Song:");
+    const awardTitle = document.createTextNode("Best Song:");
     const awardWinner = document.createTextNode(data.items[0].name);
     const awardTitleText = document.createElement('p');
     const awardTitleWinner = document.createElement('p');
@@ -203,25 +205,27 @@ function handleSongDOM(data) {
     awardContainer.appendChild(awardTitleWinner);
     songContainer.appendChild(awardContainer);
 
+    const imageWidth = (otherSongsContainer.clientWidth - imageContainerPaddingLeft - imageContainerPaddingRight) / 4 - 2.5;
+
     const songImage2 = document.createElement("img");
     songImage2.src = data.items[1].album.images[0].url;
-    songImage2.style.width = (otherSongsContainer.offsetHeight / 2)+ "px";
-    songImage2.style.height = (otherSongsContainer.offsetHeight / 2)+ "px";
+    songImage2.style.width = imageWidth + "px";
+    songImage2.style.height = imageWidth + "px";
 
     const songImage3 = document.createElement("img");
     songImage3.src = data.items[2].album.images[0].url;
-    songImage3.style.width = (otherSongsContainer.offsetHeight / 2)+ "px";
-    songImage3.style.height = (otherSongsContainer.offsetHeight / 2)+ "px";
+    songImage3.style.width = imageWidth + "px";
+    songImage3.style.height = imageWidth + "px";
 
     const songImage4 = document.createElement("img");
     songImage4.src = data.items[3].album.images[0].url;
-    songImage4.style.width = (otherSongsContainer.offsetHeight / 2)+ "px";
-    songImage4.style.height = (otherSongsContainer.offsetHeight / 2)+ "px";
+    songImage4.style.width = imageWidth + "px";
+    songImage4.style.height = imageWidth + "px";
 
     const songImage5 = document.createElement("img");
     songImage5.src = data.items[4].album.images[0].url;
-    songImage5.style.width = (otherSongsContainer.offsetHeight / 2)+ "px";
-    songImage5.style.height = (otherSongsContainer.offsetHeight / 2)+ "px";
+    songImage5.style.width = imageWidth + "px";
+    songImage5.style.height = imageWidth + "px";
     
     otherSongsContainer.appendChild(songImage2);
     otherSongsContainer.appendChild(songImage3);
@@ -231,6 +235,9 @@ function handleSongDOM(data) {
 
 function handleArtistDOM(data) {
     const imageContainer = document.querySelector('.data-container');
+    const imageContainerPaddingLeft = parseFloat(window.getComputedStyle(imageContainer, null).getPropertyValue('padding-left'));
+    const imageContainerPaddingRight = parseFloat(window.getComputedStyle(imageContainer, null).getPropertyValue('padding-right'));
+
     if(imageContainer.children.length > 0) {
         while (imageContainer.firstChild) {
             imageContainer.removeChild(imageContainer.lastChild);
@@ -243,6 +250,8 @@ function handleArtistDOM(data) {
     imageContainer.appendChild(artistContainer);
     imageContainer.appendChild(otherArtistsContainer);
 
+    const imageWidth = (otherArtistsContainer.clientWidth - imageContainerPaddingLeft - imageContainerPaddingRight) / 4 - 2.5;
+
     const artistImage = document.createElement("img");
     artistImage.src = data.items[0].images[0].url;
     artistImage.style.width = artistContainer.offsetHeight+ "px";
@@ -251,7 +260,7 @@ function handleArtistDOM(data) {
     
     const awardContainer = document.createElement('div');
     awardContainer.classList.add('award-container');
-    const awardTitle = document.createTextNode("Top Artist:");
+    const awardTitle = document.createTextNode("Best Artist:");
     const awardWinner = document.createTextNode(data.items[0].name);
     const awardTitleText = document.createElement('p');
     const awardTitleWinner = document.createElement('p');
@@ -263,23 +272,23 @@ function handleArtistDOM(data) {
 
     const artistImage2 = document.createElement("img");
     artistImage2.src = data.items[1].images[0].url;
-    artistImage2.style.width = (otherArtistsContainer.offsetHeight / 2)+ "px";
-    artistImage2.style.height = (otherArtistsContainer.offsetHeight / 2)+ "px";
+    artistImage2.style.width = imageWidth + "px";
+    artistImage2.style.height = imageWidth + "px";
 
     const artistImage3 = document.createElement("img");
     artistImage3.src = data.items[2].images[0].url;
-    artistImage3.style.width = (otherArtistsContainer.offsetHeight / 2)+ "px";
-    artistImage3.style.height = (otherArtistsContainer.offsetHeight / 2)+ "px";
+    artistImage3.style.width = imageWidth + "px";
+    artistImage3.style.height = imageWidth + "px";
 
     const artistImage4 = document.createElement("img");
     artistImage4.src = data.items[3].images[0].url;
-    artistImage4.style.width = (otherArtistsContainer.offsetHeight / 2)+ "px";
-    artistImage4.style.height = (otherArtistsContainer.offsetHeight / 2)+ "px";
+    artistImage4.style.width = imageWidth + "px";
+    artistImage4.style.height = imageWidth + "px";
 
     const artistImage5 = document.createElement("img");
     artistImage5.src = data.items[4].images[0].url;
-    artistImage5.style.width = (otherArtistsContainer.offsetHeight / 2)+ "px";
-    artistImage5.style.height = (otherArtistsContainer.offsetHeight / 2)+ "px";
+    artistImage5.style.width = imageWidth + "px";
+    artistImage5.style.height = imageWidth + "px";
     
     otherArtistsContainer.appendChild(artistImage2);
     otherArtistsContainer.appendChild(artistImage3);
