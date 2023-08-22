@@ -1,6 +1,6 @@
-//const REDIRECT_URI = "http://127.0.0.1:5500/home.html";
+const REDIRECT_URI = "http://127.0.0.1:5500/home.html";
 //const INDEX_URI = "http://127.0.0.1:5500/index.html";
-const REDIRECT_URI = "https://awardify.vercel.app/home.html";
+//const REDIRECT_URI = "https://awardify.vercel.app/home.html";
 const INDEX_URI = "https://awardify.vercel.app/index.html";
 const SCOPE = 'user-top-read';
 const AUTHORIZE = "https://accounts.spotify.com/authorize";
@@ -92,6 +92,7 @@ function requestAuthorization() {
 function onPageLoad() {
     if(window.location.href.includes('index.html')){
         handleRedirect();
+        console.log('hello');
         loadArtists();
     }
 }
@@ -289,13 +290,12 @@ function handleArtistDOM(data) {
 
 function handleRedirect() {
     let code = getCode();
-    
+    console.log('hi');
     getAccessToken(code);
-    
-    //window.history.pushState("", "", REDIRECT_URI);
 }
 
 function getAccessToken(code) {
+    console.log('bye');
     let codeVerifier = localStorage.getItem('code_verifier');
     let body = new URLSearchParams({
         grant_type: 'authorization_code',
@@ -319,12 +319,15 @@ function getAccessToken(code) {
         return response.json();
     })
     .then(data => {
+        console.log(data.access_token);
         localStorage.setItem('access_token', data.access_token);
         localStorage.setItem("refresh_token", refresh_token);
     })
     .catch(error => {
         console.error('Error:', error);
     });
+
+    console.log(response);
     
     // let str = "grant_type=authorization_code";
     // str += "&code=" + code; 
