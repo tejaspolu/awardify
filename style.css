@@ -55,69 +55,6 @@ body {
     user-select: none;
 }
 
-.header {
-    width: 100%;
-    display: flex;
-    justify-content:space-between;
-    align-items: center;
-    border-bottom: 1px solid lightgrey;
-}
-
-.header-options {
-    display: flex;
-    gap: 30px;
-    justify-content: flex-end;
-    list-style-type: none;
-    padding-right: 30px;
-}
-
-.header-option a{
-    text-decoration: none;
-    position: relative;
-    color: #000;
-    padding-bottom: 2px;
-}
-
-.header-option a:hover {
-    cursor: pointer;
-    transition: all 0.3s ease 0s;
-}
-
-.header-option a::before {
-    content: "";
-    position: absolute;
-    display: block;
-    width: 100%;
-    height: 2px;
-    bottom: 0;
-    left: 0;
-    background-color: #000;
-    transform: scaleX(0);
-    transition: transform 0.3s ease;
-}
-.header-option a:hover::before {
-    transform: scaleX(1);
-}
-
-h1 {
-    padding: 25px 30px;
-    font-family: "caprasimo-regular";
-    letter-spacing: 2px;
-    font-size: 50px;
-    font-weight: bold;
-    color: black;
-    position: relative;
-    justify-self: center;
-}
-
-h1 a {
-    text-decoration: none;
-}
-
-h1 a:hover {
-    color: rgba(0, 0, 0, 0.7);
-    transition: all 0.3s ease 0s;
-}
 
 h2 {
     font-size: 30px;
@@ -315,7 +252,7 @@ a:visited {
     width: 600px;
     padding: 50px;
     box-shadow: 0 5px 30px rgba(0,0,0,0.3);
-    background-color: #fff;
+    background-color: #f9f9f9;
     visibility: hidden;
     opacity: 0;
     transition: 0.5s;
@@ -337,8 +274,274 @@ a:visited {
     margin-top: 20px;
 }
 
-@media only screen and (min-width: 400px) and (max-width: 1150px){
+@media only screen and (min-width: 100px) and (max-width: 1150px){
     .container {
         flex-direction: column;
     }
+}
+
+@media only screen and (min-width: 100px) and (max-width: 700px){
+    .container .image-container {
+        min-width: unset;
+        min-height: unset;
+        width: 100%;
+        height: 100%;
+        flex: 1;
+        margin: 10px;
+    }
+
+    .data-container {
+        gap: 10px;
+        padding-left: 10px;
+        padding-right: 5px;
+        padding-top: 20px;
+    }
+
+    .data-container div {
+        gap: 9px;
+    }
+}
+
+header {
+    font-family: "poppins-medium", sans-serif;
+    width: 100%;
+    position: relative;
+    z-index: 5;
+    color: black;
+  }
+  
+  nav {
+    float: right;
+  }
+  
+  nav ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  nav ul li {
+    float: left;
+    position: flex;
+  }
+  nav ul li a {
+    display: block;
+    padding: 0 15px;
+    line-height: 90px;
+    font-weight: 400;
+    font-size: 16px;
+    color: black;
+    text-decoration: none;
+    position: inherit;
+    z-index: 3;
+  }
+  
+  nav ul li a:hover {
+    color: rgba(0, 0, 0, 0.7);
+    transition: all 0.3s ease 0s;
+    cursor: pointer;
+  }
+  
+  .nav-dropdown {
+    position: absolute;
+    z-index: 3;
+    box-shadow: 0 3px 12px rgba(0, 0, 0, 0.15);
+    display: none;
+  }
+  
+  .nav-mobile {
+    color: black;
+    display: none;
+    position: absolute;
+    z-index: 3;
+    top: 0;
+    right: 0;
+    height: 90px;
+    width: 70px;
+  }
+
+  .brand {
+    position: absolute;
+    padding-left: 25px;
+    float: left;
+    line-height: 70px;
+    letter-spacing: 3px;
+    font-family: "caprasimo-regular";
+  }
+
+  .brand a:hover {
+    color: rgba(0, 0, 0, 0.7);
+    transition: all 0.3s ease 0s;
+  }
+
+  @media only screen and (min-width: 600px) and (max-width: 767px) {
+
+
+    .brand a {
+      padding-left: 0px !important;
+      justify-content: center;
+      text-align: center;
+      margin: 0 auto;
+    }
+  }
+  
+  @media only screen and (max-width: 599px) {
+    .brand a {
+      padding-left: 0px !important;
+      justify-content: center;
+      text-align: center;
+      margin: 0 auto;
+      font-size: 40px;
+    }
+  
+    h5 {
+      display: none;
+    }
+  }
+  
+  @media only screen and (max-width: 830px) {
+    .nav-mobile {
+      display: block;
+    }
+    section.navigation {
+        border-bottom: 0px;
+    } 
+    nav {
+      width: 100%;
+      padding-top: 90px;
+      position: sticky;
+      z-index: 3;
+      border-bottom: 1px solid lightgrey;
+    }
+    .brand {
+      position: sticky;
+      z-index: 4;
+    }
+    nav ul {
+      display: none;
+    }
+    nav ul li {
+      float: none;
+    }
+    nav ul li a {
+      padding: 13px 15px 13px 25px;
+      line-height: 20px;
+    }
+    nav ul li a button {
+      margin-bottom: 15px;
+    }
+    nav ul li ul li a {
+      padding-left: 30px;
+    }
+  }
+  
+  @media only screen and (min-width: 768px) and (max-width: 830px) {
+    .logo {
+      height: 116px;
+      width: 200px;
+    }
+    .bg-text h1 {
+      font-size: 35px;
+    }
+  }
+  
+  @media only screen and (max-width: 599px) {
+    .logo {
+      height: 58px;
+      width: 100px;
+    }
+    .bg-text h1 {
+      font-size: 25px;
+    }
+  }
+  
+  #nav-toggle {
+    color: black;
+    position: absolute;
+    left: 18px;
+    top: 27px;
+    cursor: pointer;
+    padding: 16px 35px 16px 0px;
+  }
+  #nav-toggle span,
+  #nav-toggle span:before,
+  #nav-toggle span:after {
+    cursor: pointer;
+    border-radius: 1px;
+    height: 5px;
+    width: 35px;
+    background: black;
+    position: absolute;
+    display: block;
+    content: "";
+    transition: all 300ms ease-in-out;
+  }
+  #nav-toggle span:before {
+    top: -10px;
+  }
+  #nav-toggle span:after {
+    bottom: -10px;
+  }
+  #nav-toggle.active span {
+    background-color: transparent;
+  }
+  #nav-toggle.active span:before,
+  #nav-toggle.active span:after {
+    top: 0;
+  }
+  #nav-toggle.active span:before {
+    transform: rotate(45deg);
+  }
+  #nav-toggle.active span:after {
+    transform: rotate(-45deg);
+  }
+  
+  @media screen and (min-width: 831px) {
+    .nav-list {
+      display: block !important;
+    }
+  }
+  
+  .navigation {
+    height: 90px;
+    background-color: #f9f9f9;
+    border-bottom: 1px solid lightgrey;
+  }
+  
+  .nav-container {
+    width: auto;
+    margin: 0 auto;
+  }
+  
+  .brand {
+    position: absolute;
+    padding-left: 25px;
+    float: left;
+    line-height: 90px;
+    font-size: 50px;
+    text-decoration: none;
+  }
+
+  .brand a {
+    text-decoration: none;
+  }
+
+.contact-btn {
+    margin-right: 5px;
+    padding: 9px 25px;
+    background-color: transparent;
+    border: 1.75px solid;
+    border-color: rgb(24, 24, 24);
+    cursor: pointer;
+    
+    font-family: "poppins-medium", sans-serif;
+    font-weight: 400;
+    font-size: 16px;
+    color: rgb(24, 24, 24);
+    border-radius: 2px;
+}
+
+.contact-btn:hover {
+    background-color: rgb(24, 24, 24);
+    color: #f9f9f9;
+    transition: all 0.3s ease 0s;
 }

@@ -9,15 +9,44 @@
 </head>
 <body onload="onPageLoad()">
     <div class="body-container" id="blur">
-        <div class="header">
+        <header>
+            <section class="navigation">
+              <div class="nav-container">
+                <div class="brand">
+                  <a href="">AWARDIFY</a>
+                </div>
+                <nav>
+                  <div class="nav-mobile">
+                    <a id="nav-toggle" href="#!"><span></span></a>
+                  </div>
+                  <ul class="nav-list">
+                    <li><a href="">Home</a></li>
+                    <li>
+                      <a onclick="toggleModal()">Privacy Policy</a>
+                    </li>
+                    <li>
+                        <a onclick="logOut()">Log Out</a>
+                    </li>
+                    <li>
+                      <a href=""><button class="contact-btn">Contact Us</button></a>
+                    </li>
+                  </ul>
+                </nav>
+              </div>
+            </section>
+          </header>
+        <!-- <div class="header">
             <h1><a href="">AWARDIFY</a></h1>
+            <div class="nav-mobile">
+                <a id="nav-toggle" href="#!"><span></span></a>
+            </div>
             <ul class="header-options">
                 <li class="header-option"><a href="">Home</a></li>
                 <li class="header-option"><a onclick="toggleModal()">Privacy Policy</a></li>
                 <li class="header-option"><a href="">Contact Us</a></li>
                 <li class="header-option"><a onclick="logOut()">Logout</a></li>
             </ul>
-        </div>
+        </div> -->
         <div class="container">
             <div class="options-container">
                 <div class="btn-options-container">
@@ -41,7 +70,7 @@
                     <button>Download and Share</button>
                 </div>
             </div>
-            <div class="image-container">
+            <div class="image-container" onresize="loadArtists()">
                 <img src="stage.jpeg" alt="" class="stage-img">
                 <div class="data-container">
 
@@ -60,5 +89,6 @@
         <button onclick="toggleModal()">Close</button>
     </div>
 </body>
+<script type="text/javascript" src="jquery-3.6.0.min.js"></script>
 <script src="index.js"></script>
 </html>

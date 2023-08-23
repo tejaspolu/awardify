@@ -12,6 +12,34 @@ var access_token = null;
 var refresh_token = null;
 var awardType = 'artist';
 
+(function($) {
+    $(function() {
+      $('nav ul li a:not(:only-child)').click(function(e) {
+        $(this).siblings('.nav-dropdown').toggle();
+        $('.nav-dropdown').not($(this).siblings()).hide();
+        e.stopPropagation();
+      });
+      $('html').click(function() {
+        $('.nav-dropdown').hide();
+      });
+      $('#nav-toggle').click(function() {
+        $('nav ul').slideToggle();
+      });
+      $('#nav-toggle').on('click', function() {
+        this.classList.toggle('active');
+      });
+    });
+  })(jQuery);
+
+  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        document.querySelector(this.getAttribute('href')).scrollIntoView({
+            behavior: 'smooth'
+        });
+    });
+  });
+
 
 function generateRandomString(length) {
     let text = '';
@@ -39,7 +67,7 @@ async function generateCodeChallenge(codeVerifier) {
 
 function refreshAccessToken(){
     console.log('bye');
-    if(localStorage.getItem("refresh_token") !== null){
+    if(localStorage.getItem("refresh_token") != "null"){
         refresh_token = localStorage.getItem("refresh_token");
         let body = new URLSearchParams({
             grant_type: 'refresh_token',
@@ -94,12 +122,20 @@ function requestAuthorization() {
 
 function onPageLoad() {
     if(window.location.search.length > 0){
-        handleRedirect();
+        if(localStorage.getItem("refresh_token") == "null") handleRedirect();
         loadArtists();
     }
 }
 
-function loadData(time_range, dataType) {
+function getTimeRange() {
+    var timeRange = null;
+    if(document.querySelector('.btn-weeks').classList.contains('underline')) timeRange = 'short_term';
+    if(document.querySelector('.btn-months').classList.contains('underline')) timeRange = 'medium_term';
+    if(document.querySelector('.btn-years').classList.contains('underline')) timeRange = 'long_term';
+    return timeRange;
+}
+
+function loadData(time_range) {
     const artistButton = document.querySelector('#artist-btn');
     const songButton = document.querySelector('#song-btn');
     if(artistButton.classList.contains('underline')) {
@@ -113,10 +149,7 @@ function loadData(time_range, dataType) {
 function loadArtists() {
     const artistButton = document.querySelector('#artist-btn');
     const imageContainer = document.querySelector('.data-container');
-    var timeRange = null;
-    if(document.querySelector('.btn-weeks').classList.contains('underline')) timeRange = 'short_term';
-    if(document.querySelector('.btn-months').classList.contains('underline')) timeRange = 'medium_term';
-    if(document.querySelector('.btn-years').classList.contains('underline')) timeRange = 'long_term';
+    var timeRange = getTimeRange();
     
     if((artistButton.classList.contains('underline') & imageContainer.children.length == 0) || artistButton.classList.contains('no-underline')){
         callApi("GET", `https://api.spotify.com/v1/me/top/artists?time_range=${timeRange}&limit=5&offset=0`, null, handleArtistsResponses);
@@ -126,10 +159,7 @@ function loadArtists() {
 function loadSongs() {
     const songButton = document.querySelector('#song-btn');
     const imageContainer = document.querySelector('.data-container');
-    var timeRange = null;
-    if(document.querySelector('.btn-weeks').classList.contains('underline')) timeRange = 'short_term';
-    if(document.querySelector('.btn-months').classList.contains('underline')) timeRange = 'medium_term';
-    if(document.querySelector('.btn-years').classList.contains('underline')) timeRange = 'long_term';
+    var timeRange = getTimeRange();
     
     if((songButton.classList.contains('underline') & imageContainer.children.length == 0) || songButton.classList.contains('no-underline')){
         callApi("GET", `https://api.spotify.com/v1/me/top/tracks?time_range=${timeRange}&limit=5&offset=0`, null, handleSongsResponses);
@@ -207,7 +237,7 @@ function handleSongDOM(data) {
     awardContainer.appendChild(awardTitleText);
     awardContainer.appendChild(awardTitleWinner);
     songContainer.appendChild(awardContainer);
-
+    console.log('hello' + imageContainer.style.gap);
     const imageWidth = (otherSongsContainer.clientWidth - imageContainerPaddingLeft - imageContainerPaddingRight) / 4 - 2.5;
 
     const songImage2 = document.createElement("img");
@@ -329,9 +359,10 @@ function getAccessToken(code) {
         return response.json();
     })
     .then(data => {
-        console.log(data.access_token);
+        console.log("my access token is " + data.access_token);
         localStorage.setItem('access_token', data.access_token);
-        localStorage.setItem("refresh_token", refresh_token);
+        console.log("my refresh token is " + data.refresh_token);
+        localStorage.setItem("refresh_token", data.refresh_token);
     })
     .catch(error => {
         console.error('Error:', error);
@@ -388,6 +419,14 @@ awardBtns.forEach(btn => btn.addEventListener('click', () => changeUnderline(btn
 document.addEventListener("DOMContentLoaded", function(event) { 
     document.getElementById("artist-btn").click();
 });
+
+
+let resizeObserver = new ResizeObserver(() => {
+    var timeRange = getTimeRange();
+    loadData(timeRange);
+});
+  
+resizeObserver.observe(document.querySelector('.image-container'));
 
 
 
