@@ -38,33 +38,36 @@ async function generateCodeChallenge(codeVerifier) {
 }
 
 function refreshAccessToken(){
-    refresh_token = localStorage.getItem("refresh_token");
-    let body = new URLSearchParams({
-        grant_type: 'refresh_token',
-        refresh_token: refresh_token,
-        client_id: client_id,
-    });
+    console.log('bye');
+    if(localStorage.getItem("refresh_token") !== null){
+        refresh_token = localStorage.getItem("refresh_token");
+        let body = new URLSearchParams({
+            grant_type: 'refresh_token',
+            refresh_token: refresh_token,
+            client_id: client_id,
+        });
 
-    const response = fetch('https://accounts.spotify.com/api/token', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/x-www-form-urlencoded'
-        },
-        body: body
-    })
-    .then(response => {
-        if (!response.ok) {
-        throw new Error('HTTP status ' + response.status);
-        }
-        return response.json();
-    })
-    .then(data => {
-        localStorage.setItem('access_token', data.access_token);
-        localStorage.setItem("refresh_token", refresh_token);
-    })
-    .catch(error => {
-        console.error('Error:', error);
-    });
+        const response = fetch('https://accounts.spotify.com/api/token', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded'
+            },
+            body: body
+        })
+        .then(response => {
+            if (!response.ok) {
+            throw new Error('HTTP status ' + response.status);
+            }
+            return response.json();
+        })
+        .then(data => {
+            localStorage.setItem('access_token', data.access_token);
+            localStorage.setItem("refresh_token", refresh_token);
+        })
+        .catch(error => {
+            console.error('Error:', error);
+        });
+    }
 }
 
 function requestAuthorization() {
@@ -302,6 +305,7 @@ function handleRedirect() {
 }
 
 function getAccessToken(code) {
+    console.log('hello');
     let codeVerifier = localStorage.getItem('code_verifier');
     let body = new URLSearchParams({
         grant_type: 'authorization_code',
@@ -325,6 +329,7 @@ function getAccessToken(code) {
         return response.json();
     })
     .then(data => {
+        console.log(data.access_token);
         localStorage.setItem('access_token', data.access_token);
         localStorage.setItem("refresh_token", refresh_token);
     })
