@@ -368,11 +368,11 @@ function getAccessToken(code) {
         localStorage.setItem('access_token', data.access_token);
         console.log("my refresh token is " + data.refresh_token);
         localStorage.setItem("refresh_token", data.refresh_token);
+        loadArtists();
     })
     .catch(error => {
         console.error('Error:', error);
     });
-    loadArtists();
     // let str = "grant_type=authorization_code";
     // str += "&code=" + code; 
     // str += "&redirect_uri=" + encodeURI(REDIRECT_URI);
@@ -421,9 +421,9 @@ timeBtns.forEach(btn => btn.addEventListener('click', () => changeUnderline(btn,
 const awardBtns = document.querySelectorAll('.award-option');
 awardBtns.forEach(btn => btn.addEventListener('click', () => changeUnderline(btn, '.award-option')));
 
-document.addEventListener("DOMContentLoaded", function(event) { 
-    document.getElementById("artist-btn").click();
-});
+// document.addEventListener("DOMContentLoaded", function(event) { 
+//     document.getElementById("artist-btn").click();
+// });
 
 
 let resizeObserver = new ResizeObserver(() => {
