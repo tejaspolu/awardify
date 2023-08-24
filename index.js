@@ -68,10 +68,11 @@ async function generateCodeChallenge(codeVerifier) {
 function refreshAccessToken(){
     console.log('bye');
     if(localStorage.getItem("refresh_token") != "null"){
-        refresh_token = localStorage.getItem("refresh_token");
+        var REFRESH_TOKEN = localStorage.getItem("refresh_token");
+        console.log(REFRESH_TOKEN);
         let body = new URLSearchParams({
             grant_type: 'refresh_token',
-            refresh_token: refresh_token,
+            refresh_token: REFRESH_TOKEN,
             client_id: client_id,
         });
 
@@ -94,7 +95,7 @@ function refreshAccessToken(){
         })
         .catch(error => {
             console.error('Error:', error);
-        });
+        }); 
     }
 }
 
@@ -122,10 +123,12 @@ function requestAuthorization() {
 
 function onPageLoad() {
     if(window.location.search.length > 0){
+        console.log(localStorage.getItem("refresh_token"));
+        console.log(localStorage.getItem("refresh_token") == "null");
         if(localStorage.getItem("refresh_token") == "null") {
             handleRedirect();
         }
-        loadArtists();
+        handleRedirect();
     }
 }
 
@@ -369,7 +372,7 @@ function getAccessToken(code) {
     .catch(error => {
         console.error('Error:', error);
     });
-    
+    loadArtists();
     // let str = "grant_type=authorization_code";
     // str += "&code=" + code; 
     // str += "&redirect_uri=" + encodeURI(REDIRECT_URI);
