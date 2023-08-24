@@ -123,7 +123,7 @@ function requestAuthorization() {
 function onPageLoad() {
     if(window.location.search.length > 0){
         if(localStorage.getItem("refresh_token") == "null") {
-            setTimeout(handleRedirect(), 2000);
+            handleRedirect();
         }
         loadArtists();
     }
