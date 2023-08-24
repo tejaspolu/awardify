@@ -1,7 +1,7 @@
-//const REDIRECT_URI = "http://127.0.0.1:5500/home.html";
-//const INDEX_URI = "http://127.0.0.1:5500/index.html";
-const REDIRECT_URI = "https://awardify.vercel.app/home.html";
-const INDEX_URI = "https://awardify.vercel.app/index.html";
+const REDIRECT_URI = "http://127.0.0.1:5500/home.html";
+const INDEX_URI = "http://127.0.0.1:5500/index.html";
+//const REDIRECT_URI = "https://awardify.vercel.app/home.html";
+//const INDEX_URI = "https://awardify.vercel.app/index.html";
 const SCOPE = 'user-top-read';
 const AUTHORIZE = "https://accounts.spotify.com/authorize";
 const TOKEN = "https://accounts.spotify.com/api/token";
@@ -66,10 +66,8 @@ async function generateCodeChallenge(codeVerifier) {
 }
 
 function refreshAccessToken(){
-    console.log('bye');
     if(localStorage.getItem("refresh_token") != "null"){
         var REFRESH_TOKEN = localStorage.getItem("refresh_token");
-        console.log(REFRESH_TOKEN);
         let body = new URLSearchParams({
             grant_type: 'refresh_token',
             refresh_token: REFRESH_TOKEN,
@@ -123,8 +121,6 @@ function requestAuthorization() {
 
 function onPageLoad() {
     if(window.location.search.length > 0){
-        console.log(localStorage.getItem("refresh_token"));
-        console.log(localStorage.getItem("refresh_token") == "null");
         if(localStorage.getItem("refresh_token") == "null") {
             handleRedirect();
         }
@@ -242,7 +238,6 @@ function handleSongDOM(data) {
     awardContainer.appendChild(awardTitleText);
     awardContainer.appendChild(awardTitleWinner);
     songContainer.appendChild(awardContainer);
-    console.log('hello' + imageContainer.style.gap);
     const imageWidth = (otherSongsContainer.clientWidth - imageContainerPaddingLeft - imageContainerPaddingRight) / 4 - 2.5;
 
     const songImage2 = document.createElement("img");
@@ -340,7 +335,6 @@ function handleRedirect() {
 }
 
 function getAccessToken(code) {
-    console.log('hello');
     let codeVerifier = localStorage.getItem('code_verifier');
     let body = new URLSearchParams({
         grant_type: 'authorization_code',
@@ -364,21 +358,13 @@ function getAccessToken(code) {
         return response.json();
     })
     .then(data => {
-        console.log("my access token is " + data.access_token);
         localStorage.setItem('access_token', data.access_token);
-        console.log("my refresh token is " + data.refresh_token);
         localStorage.setItem("refresh_token", data.refresh_token);
         loadArtists();
     })
     .catch(error => {
         console.error('Error:', error);
     });
-    // let str = "grant_type=authorization_code";
-    // str += "&code=" + code; 
-    // str += "&redirect_uri=" + encodeURI(REDIRECT_URI);
-    // str += "&client_id=" + client_id;
-    // str += "&client_secret=" + client_secret;
-    // callAuthorizationApi(str);
 }
 
 function getCode() {
@@ -432,129 +418,3 @@ let resizeObserver = new ResizeObserver(() => {
 });
   
 resizeObserver.observe(document.querySelector('.image-container'));
-
-
-
-// function callAuthorizationApi(str){
-//     let xhr = new XMLHttpRequest();
-//     xhr.open("POST", TOKEN, true);
-//     xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-//     xhr.setRequestHeader('Authorization', 'Basic ' + btoa(client_id + ":" + client_secret));
-//     xhr.send(str);
-//     xhr.onload = handleAuthResponse;
-// }
-
-// function handleAuthResponse() {
-//     if (this.status == 200){
-//         var data = JSON.parse(this.responseText);
-//         console.log(data);
-//         if (data.access_token != undefined){
-//             access_token = data.access_token;
-//             localStorage.setItem("access_token", access_token);
-//         }
-//         if (data.refresh_token != undefined){
-//             refresh_token = data.refresh_token;
-//             localStorage.setItem("refresh_token", refresh_token);
-//         }
-//         onPageLoad();
-//     }
-//     else {
-//         console.log(this.responseText);
-//         alert(this.responseText);
-//     }
-// }
-
-// function requestAuthorization() {
-//     let url = `https://accounts.spotify.com/authorize?client_id=${client_id}&response_type=code&redirect_uri=${REDIRECT_URI}&scope=${SCOPE}`;
-//     window.location.href = url;
-    
-// }
-
-// function generateRandomString(length) {
-//     let text = '';
-//     let possible = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-  
-//     for (let i = 0; i < length; i++) {
-//       text += possible.charAt(Math.floor(Math.random() * possible.length));
-//     }
-//     return text;
-//   }
-
-
-
-
-
-// const APIController = (function() {
-    // const clientId = "61306c8268a04a0dbbed3fc83dac6d2e";
-    // const clientSecret = "5fc33a1630e84da5b25574f1ab64e53b";
-    // const redirectURi = "http://127.0.0.1:5500/index.html/callback";
-//     const scope =  'user-top-read';
-
-//     const _verifyUser  = async() => {
-//         window.location.href = `https://accounts.spotify.com/authorize?client_id=${clientId}&response_type=code&redirect_uri=${redirectURi}&scope=${scope}`;
-//         console.log("Yoooo");
-//     }
-
-//     const _getToken = async() => {
-
-//         //sending a POST request and getting token from spotify
-//         const result = await fetch('https://accounts.spotify.com/api/token', {
-//             method: 'POST',
-//             headers: {
-//                 'Content-Type' : 'application/x-www-form-urlencoded',
-//                 'Authorization' : 'Basic' + btoa(clientId + ':' + clientSecret)
-//             },
-//             body: 'grant_type=client_credentials'
-//         });
-
-//         console.log("RESULT" + result.status.toString());
-//         //converting the result to json and specifically returning the access token
-//         const data = await result.json();
-//         console.log("Hi" + data.access_token);
-//         return data.access_token;
-//     }
-
-    // const _getTopArtists = async(token) => {
-    //     const limit = 5;
-    //     const result = await fetch(`https://api.spotify.com/v1/me/top/artists?limit=5${limit}&offset=0`, {
-    //         method: 'GET',
-    //         headers: {'Authorization' : 'Bearer' + token}
-    //     })
-    //     const data = await result.json();
-    //     return data.artists;
-    // }
-
-//     //making public methods
-//     return {
-//         verifyUser() {
-//             return _verifyUser();
-//         },
-//         getToken() {
-//             return _getToken();
-//         },
-//         getTopArtists() {
-//             return _getTopArtists(token);
-//         }
-//     }
-// })();
-
-// const UIController = (function() {})();
-
-// const APPController = (function(UICtrl, APICtrl) {
-
-//     const loadGenres = async () => {
-//         //get the token
-//         const token = await APICtrl.getToken();           
-//         console.log("Bye" + token);
-//     }
-
-//     return {
-//         init() {
-//             console.log('App is starting');
-//             loadGenres();
-//         }
-//     }
-// })(UIController, APIController);
-
-// APPController.init();
-
