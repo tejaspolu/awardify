@@ -246,16 +246,20 @@ a:visited {
 
 #modal, #presenter-modal {
     position: fixed;
+    display: flex;
+    flex-direction: column;
     top: 40%;
     left: 50%;
     transform: translate(-50%, -50%);
     width: 600px;
-    padding: 50px;
+    padding: 40px 50px;
     box-shadow: 0 5px 30px rgba(0,0,0,0.3);
     background-color: #f9f9f9;
     visibility: hidden;
     opacity: 0;
     transition: 0.5s;
+    justify-content: center;
+    align-items: center;
 }
 
 #modal.active, #presenter-modal.active {
@@ -299,6 +303,19 @@ a:visited {
 
     .data-container div {
         gap: 9px;
+    }
+
+    #modal, #presenter-modal {
+      width: 100%;
+      margin: 35px auto;
+    }
+
+    #modal h2 {
+      font-size: 30px;
+    }
+
+    #modal p {
+      font-size: 13px;
     }
 }
 
