@@ -53,7 +53,7 @@
                     <div class="data-selection">
                         <p class="options-description">Name of award:</p>
                         <div class="btn-option-container">
-                            <button class="award-option underline" id="artist-btn" onclick="loadArtists()">Best Artist</button><button class="award-option no-underline" id="song-btn" onclick="loadSongs()">Best Song</button>
+                            <button class="award-option underline" id="artist-btn" onclick="loadArtists()">Top Artist</button><button class="award-option no-underline" id="song-btn" onclick="loadSongs()">Top Song</button>
                         </div>
                     </div>
                     <div class="time-period">
@@ -72,9 +72,8 @@
             </div>
             <div class="image-container" onresize="loadArtists()">
                 <img src="images/stage.jpeg" alt="" class="stage-img">
-                <div class="data-container">
-
-                </div>
+                <div class="presenter-container"></div>
+                <div class="data-container"></div>
             </div>
         </div>
         <div class="footer">
@@ -83,21 +82,23 @@
     </div>
     <div id="presenter-modal">
         <h2>Edit Presenter</h2>
-        <div class="presenter-type-container">
-            <h3>Presenter Type: </h3>
-            <div class="presenter-btns">
-                <button class="presenter-btn"><img src="images/presenters/type1color3.png" alt="" class="presenter-img presenter-1"></button>
-                <button class="presenter-btn"><img src="images/presenters/type2color3.png" alt="" class="presenter-img presenter-2"></button>
+        <div>
+            <div class="presenter-type-container">
+                <h3>Presenter Type: </h3>
+                <div class="presenter-btns">
+                    <button class="presenter-btn"><img src="images/presenters/type1color3.png" alt="" class="presenter-img presenter-1"></button>
+                    <button class="presenter-btn"><img src="images/presenters/type2color3.png" alt="" class="presenter-img presenter-2"></button>
+                </div>
             </div>
-        </div>
-        <div class="skin-color-container">
-            <h3>Skin Color: </h3>
-            <div class="color-btns">
-                <button class="color-btn color-1"></button>
-                <button class="color-btn color-2"></button>
-                <button class="color-btn color-3"></button>
-                <button class="color-btn color-4"></button>
-                <button class="color-btn color-5"></button>
+            <div class="skin-color-container">
+                <h3>Skin Color: </h3>
+                <div class="color-btns">
+                    <button class="color-btn color-1"></button>
+                    <button class="color-btn color-2"></button>
+                    <button class="color-btn color-3"></button>
+                    <button class="color-btn color-4"></button>
+                    <button class="color-btn color-5"></button>
+                </div>
             </div>
         </div>
         <!-- <form action="edit_presenter.php">

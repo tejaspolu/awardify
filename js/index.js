@@ -40,6 +40,20 @@ var awardType = 'artist';
     });
   });
 
+function toggleModal(){
+    var blur = document.getElementById('blur');
+    blur.classList.toggle('active');
+    var modal = document.getElementById('modal');
+    modal.classList.toggle('active');
+}
+
+function togglePresenter(){
+    var blur = document.getElementById('blur');
+    blur.classList.toggle('active');
+    var modal = document.getElementById('presenter-modal');
+    modal.classList.toggle('active');
+}
+
 function generateRandomString(length) {
     let text = '';
     let possible = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
@@ -225,7 +239,7 @@ function handleSongDOM(data) {
     
     const awardContainer = document.createElement('div');
     awardContainer.classList.add('award-container');
-    const awardTitle = document.createTextNode("Best Song:");
+    const awardTitle = document.createTextNode("Top Song:");
     const awardWinner = document.createTextNode(data.items[0].name);
     const awardTitleText = document.createElement('p');
     const awardTitleWinner = document.createElement('p');
@@ -289,7 +303,7 @@ function handleArtistDOM(data) {
     
     const awardContainer = document.createElement('div');
     awardContainer.classList.add('award-container');
-    const awardTitle = document.createTextNode("Best Artist:");
+    const awardTitle = document.createTextNode("Top Artist:");
     const awardWinner = document.createTextNode(data.items[0].name);
     const awardTitleText = document.createElement('p');
     const awardTitleWinner = document.createElement('p');
@@ -327,7 +341,7 @@ function handleArtistDOM(data) {
 
 function handleRedirect() {
     let code = getCode();
-    getAccessToken(code);
+    if(localStorage.getItem("access_token") == "null") getAccessToken(code);
 }
 
 function getAccessToken(code) {
@@ -370,20 +384,6 @@ function getCode() {
         code = urlParams.get('code');
     }
     return code;
-}
-
-function toggleModal(){
-    var blur = document.getElementById('blur');
-    blur.classList.toggle('active');
-    var modal = document.getElementById('modal');
-    modal.classList.toggle('active');
-}
-
-function togglePresenter(){
-    var blur = document.getElementById('blur');
-    blur.classList.toggle('active');
-    var modal = document.getElementById('presenter-modal');
-    modal.classList.toggle('active');
 }
 
 function logOut() {

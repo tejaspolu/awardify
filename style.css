@@ -245,6 +245,7 @@ a:visited {
 }
 
 #modal, #presenter-modal {
+    visibility: hidden;
     position: fixed;
     display: flex;
     flex-direction: column;
@@ -255,9 +256,8 @@ a:visited {
     padding: 40px 50px;
     box-shadow: 0 5px 30px rgba(0,0,0,0.3);
     background-color: #f9f9f9;
-    visibility: hidden;
     opacity: 0;
-    transition: 0.5s;
+    /* transition: 0.5s; */
     justify-content: center;
     align-items: center;
 }
@@ -306,8 +306,7 @@ a:visited {
     }
 
     #modal, #presenter-modal {
-      width: 100%;
-      margin: 35px auto;
+      width: 90%;
     }
 
     #modal h2 {
@@ -315,7 +314,7 @@ a:visited {
     }
 
     #modal p {
-      font-size: 13px;
+      font-size: 14px;
     }
 }
 
@@ -340,6 +339,7 @@ header {
     float: left;
     position: flex;
   }
+
   nav ul li a {
     display: block;
     padding: 0 15px;
@@ -348,8 +348,9 @@ header {
     font-size: 16px;
     color: black;
     text-decoration: none;
-    position: inherit;
+    position: relative;
     z-index: 3;
+    transition: 0.5s;
   }
   
   nav ul li a:hover {
@@ -584,6 +585,7 @@ header {
 }
 
 .skin-color-container {
+  padding-top: 10px;
   padding-bottom: 25px;
 }
 
