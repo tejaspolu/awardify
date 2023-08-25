@@ -178,13 +178,15 @@ function loadSongs() {
 }
 
 function callApi(method, url, body, callback){
-    let xhr = new XMLHttpRequest();
-    let access_token = localStorage.getItem('access_token');
-    xhr.open(method, url, true);
-    xhr.setRequestHeader('Content-Type', 'application/json');
-    xhr.setRequestHeader('Authorization', 'Bearer ' + access_token);
-    xhr.send(body);
-    xhr.onload = callback;
+    if(localStorage.getItem("access_token") != "null") {
+        let xhr = new XMLHttpRequest();
+        let access_token = localStorage.getItem('access_token');
+        xhr.open(method, url, true);
+        xhr.setRequestHeader('Content-Type', 'application/json');
+        xhr.setRequestHeader('Authorization', 'Bearer ' + access_token);
+        xhr.send(body);
+        xhr.onload = callback;
+    }
 }
 
 function handleArtistsResponses() {
@@ -341,40 +343,46 @@ function handleArtistDOM(data) {
 
 function handleRedirect() {
     let code = getCode();
-    if(localStorage.getItem("access_token") == "null") getAccessToken(code);
+    console.log(localStorage.getItem("access_token"));
+    console.log(localStorage.getItem("access_token") == "null");
+    getAccessToken(code);
 }
 
 function getAccessToken(code) {
-    let codeVerifier = localStorage.getItem('code_verifier');
-    let body = new URLSearchParams({
-        grant_type: 'authorization_code',
-        code: code,
-        redirect_uri: REDIRECT_URI,
-        client_id: client_id,
-        code_verifier: codeVerifier
-    });
+    if(localStorage.getItem("access_token") == "null") {
+        let codeVerifier = localStorage.getItem('code_verifier');
+        let body = new URLSearchParams({
+            grant_type: 'authorization_code',
+            code: code,
+            redirect_uri: REDIRECT_URI,
+            client_id: client_id,
+            code_verifier: codeVerifier
+        });
 
-    const response = fetch('https://accounts.spotify.com/api/token', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/x-www-form-urlencoded'
-        },
-        body: body
-    })
-    .then(response => {
-        if (!response.ok) {
-        throw new Error('HTTP status ' + response.status);
-        }
-        return response.json();
-    })
-    .then(data => {
-        localStorage.setItem('access_token', data.access_token);
-        localStorage.setItem("refresh_token", data.refresh_token);
-        loadArtists();
-    })
-    .catch(error => {
-        console.error('Error:', error);
-    });
+        const response = fetch('https://accounts.spotify.com/api/token', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded'
+            },
+            body: body
+        })
+        .then(response => {
+            if (!response.ok) {
+            throw new Error('HTTP status ' + response.status);
+            }
+            return response.json();
+        })
+        .then(data => {
+            localStorage.setItem('access_token', data.access_token);
+            localStorage.setItem("refresh_token", data.refresh_token);
+            console.log("this is my access token: " + data.access_token);
+            console.log("this is my refresh token: " + data.refresh_token);
+            loadArtists();
+        })
+        .catch(error => {
+            console.error('Error:', error);
+        });
+    }
 }
 
 function getCode() {
