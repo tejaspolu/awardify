@@ -59,12 +59,12 @@
                     <div class="time-period">
                         <p class="options-description">Select a time period:</p>
                         <div class="btn-option-container">
-                            <button class="time-option no-underline btn-weeks" onclick="loadData('short_term')">Last 4 Weeks</button><button class="time-option underline btn-months" onclick="loadData('medium_term')">Last 6 Months</button><button class="time-option no-underline btn-years" onclick="loadData('long_term')">All-Time</button>
+                            <button class="time-option no-underline btn-weeks" onclick="loadData('short_term')">Last Month</button><button class="time-option underline btn-months" onclick="loadData('medium_term')">Last 6 Months</button><button class="time-option no-underline btn-years" onclick="loadData('long_term')">All-Time</button>
                         </div>
                     </div>
                 </div>
                 <div class="presenter-selection">
-                    <button>Edit Presenter</button>
+                    <button onclick="togglePresenter()">Edit Presenter</button>
                 </div>
                 <div class="download-button">
                     <button>Download and Share</button>
@@ -80,6 +80,41 @@
         <div class="footer">
             <p class="footer-text">Made by da boys</p>
         </div>
+    </div>
+    <div id="presenter-modal">
+        <h2>Edit Presenter</h2>
+        <div class="presenter-type-container">
+            <h3>Presenter Type: </h3>
+            <div class="presenter-btns">
+                <button class="presenter-btn"><img src="images/presenters/type1color3.png" alt="" class="presenter-img presenter-1"></button>
+                <button class="presenter-btn"><img src="images/presenters/type2color3.png" alt="" class="presenter-img presenter-2"></button>
+            </div>
+        </div>
+        <div class="skin-color-container">
+            <h3>Skin Color: </h3>
+            <div class="color-btns">
+                <button class="color-btn color-1"></button>
+                <button class="color-btn color-2"></button>
+                <button class="color-btn color-3"></button>
+                <button class="color-btn color-4"></button>
+                <button class="color-btn color-5"></button>
+            </div>
+        </div>
+        <!-- <form action="edit_presenter.php">
+            <label for="presenter-type">Choose a presenter:</label>
+            <select name="presenters" id="presenters">
+              <option value="presenter-1" style="background-image:url(images/presenters/type1color3.png);">Presenter 1</option>
+              <option value="presenter-2" style="background-image:url(images/presenters/type2color3.png);">Presenter 2</option>
+            </select>
+            <br>
+            <label for="color-type">Choose a skin color:</label>
+            <select name="colors" id="colors">
+                <option value="presenter-1">Presenter 1</option>
+                <option value="presenter-2">Presenter 2</option>
+            </select>
+            <input type="submit" value="Submit">
+          </form> -->
+        <button onclick="togglePresenter()">Save Changes</button>
     </div>
     <div id="modal">
         <h2>Privacy Policy</h2>

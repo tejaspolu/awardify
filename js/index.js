@@ -1,7 +1,7 @@
-//const REDIRECT_URI = "http://127.0.0.1:5500/home.html";
-//const INDEX_URI = "http://127.0.0.1:5500/index.html";
-const REDIRECT_URI = "https://awardify.vercel.app/home.html";
-const INDEX_URI = "https://awardify.vercel.app/index.html";
+const REDIRECT_URI = "http://127.0.0.1:5500/home.html";
+const INDEX_URI = "http://127.0.0.1:5500/index.html";
+//const REDIRECT_URI = "https://awardify.vercel.app/home.html";
+//const INDEX_URI = "https://awardify.vercel.app/index.html";
 const SCOPE = 'user-top-read';
 const AUTHORIZE = "https://accounts.spotify.com/authorize";
 const TOKEN = "https://accounts.spotify.com/api/token";
@@ -39,7 +39,6 @@ var awardType = 'artist';
         });
     });
   });
-
 
 function generateRandomString(length) {
     let text = '';
@@ -377,6 +376,13 @@ function toggleModal(){
     var blur = document.getElementById('blur');
     blur.classList.toggle('active');
     var modal = document.getElementById('modal');
+    modal.classList.toggle('active');
+}
+
+function togglePresenter(){
+    var blur = document.getElementById('blur');
+    blur.classList.toggle('active');
+    var modal = document.getElementById('presenter-modal');
     modal.classList.toggle('active');
 }
 
