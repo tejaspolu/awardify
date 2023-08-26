@@ -142,7 +142,12 @@ function requestAuthorization() {
 
 function onPageLoad() {
     if(window.location.search.length > 0){
-        handleRedirect();
+        if(localStorage.getItem('refresh_token') != "null"){
+            refreshAccessToken();
+        }
+        else {
+            handleRedirect();
+        }
     }
 }
 
