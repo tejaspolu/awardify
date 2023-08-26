@@ -162,23 +162,29 @@ function getTimeRange() {
 }
 
 function loadData(time_range) {
-    const artistButton = document.querySelector('#artist-btn');
-    const songButton = document.querySelector('#song-btn');
-    if(artistButton.classList.contains('underline')) {
-        callApi("GET", `https://api.spotify.com/v1/me/top/artists?time_range=${time_range}&limit=5&offset=0`, null, handleArtistsResponses);
-    }
-    if(songButton.classList.contains('underline')) {
-        callApi("GET", `https://api.spotify.com/v1/me/top/tracks?time_range=${time_range}&limit=5&offset=0`, null, handleSongsResponses);
+    if(localStorage.getItem('access_token') != "null" && localStorage.getItem('refresh_token') == "null") handleRedirect();
+    else {
+        const artistButton = document.querySelector('#artist-btn');
+        const songButton = document.querySelector('#song-btn');
+        if(artistButton.classList.contains('underline')) {
+            callApi("GET", `https://api.spotify.com/v1/me/top/artists?time_range=${time_range}&limit=5&offset=0`, null, handleArtistsResponses);
+        }
+        if(songButton.classList.contains('underline')) {
+            callApi("GET", `https://api.spotify.com/v1/me/top/tracks?time_range=${time_range}&limit=5&offset=0`, null, handleSongsResponses);
+        }
     }
 }
 
 function loadArtists() {
-    const artistButton = document.querySelector('#artist-btn');
-    const imageContainer = document.querySelector('.data-container');
-    var timeRange = getTimeRange();
-    
-    if((artistButton.classList.contains('underline') & imageContainer.children.length == 0) || artistButton.classList.contains('no-underline')){
-        callApi("GET", `https://api.spotify.com/v1/me/top/artists?time_range=${timeRange}&limit=5&offset=0`, null, handleArtistsResponses);
+    if(localStorage.getItem('access_token') != "null" && localStorage.getItem('refresh_token') == "null") handleRedirect();
+    else {
+        const artistButton = document.querySelector('#artist-btn');
+        const imageContainer = document.querySelector('.data-container');
+        var timeRange = getTimeRange();
+        
+        if((artistButton.classList.contains('underline') & imageContainer.children.length == 0) || artistButton.classList.contains('no-underline')){
+            callApi("GET", `https://api.spotify.com/v1/me/top/artists?time_range=${timeRange}&limit=5&offset=0`, null, handleArtistsResponses);
+        }
     }
 }
 
