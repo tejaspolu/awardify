@@ -142,6 +142,8 @@ function requestAuthorization() {
 
 function onPageLoad() {
     if(window.location.search.length > 0){
+        console.log("onPageLoad refresh token: " + localStorage.getItem('refresh_token'))
+        console.log(localStorage.getItem('refresh_token') != "null");
         if(localStorage.getItem('refresh_token') != "null"){
             refreshAccessToken();
         }
