@@ -370,7 +370,7 @@ function handleRedirect() {
 }
 
 function getAccessToken(code) {
-    if(localStorage.getItem('access_token') == "null"){
+    if(localStorage.getItem('access_token') == "null" || localStorage.getItem('refresh_token') == "null"){
         let codeVerifier = localStorage.getItem('code_verifier');
         let body = new URLSearchParams({
             grant_type: 'authorization_code',
