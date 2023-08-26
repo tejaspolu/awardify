@@ -79,7 +79,9 @@ async function generateCodeChallenge(codeVerifier) {
 }
 
 function refreshAccessToken(){
+    console.log('hello');
     if(localStorage.getItem("refresh_token") != "null"){
+        console.log('bye');
         var REFRESH_TOKEN = localStorage.getItem("refresh_token");
         let body = new URLSearchParams({
             grant_type: 'refresh_token',
@@ -101,13 +103,19 @@ function refreshAccessToken(){
             return response.json();
         })
         .then(data => {
+            console.log('this is my new access token: ' + data.access_token);
             localStorage.setItem('access_token', data.access_token);
             localStorage.setItem("refresh_token", refresh_token);
+            setTimeout(refreshAccessToken, 3000000);
         })
         .catch(error => {
             console.error('Error:', error);
         }); 
     }
+}
+
+function startTimer() {
+
 }
 
 function requestAuthorization() {
@@ -349,7 +357,7 @@ function handleRedirect() {
 }
 
 function getAccessToken(code) {
-    if(localStorage.getItem("access_token") == "null") {
+    if(localStorage.getItem('access_token') == "null"){
         let codeVerifier = localStorage.getItem('code_verifier');
         let body = new URLSearchParams({
             grant_type: 'authorization_code',
@@ -377,6 +385,7 @@ function getAccessToken(code) {
             localStorage.setItem("refresh_token", data.refresh_token);
             console.log("this is my access token: " + data.access_token);
             console.log("this is my refresh token: " + data.refresh_token);
+            setTimeout(refreshAccessToken, 3000000);
             loadArtists();
         })
         .catch(error => {
